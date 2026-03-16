@@ -1,0 +1,104 @@
+name: HRMS Frontend Deploy
+
+on:
+  push:
+    branches:
+      - dev
+      - qa
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Verify build
+        run: |
+          echo "Build output:"
+          ls -R dist
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hrms-frontend
+          path: dist
+
+
+  deploy:
+
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hrms-frontend
+          path: dist
+
+      - name: Verify artifact
+        run: |
+          echo "Downloaded files:"
+          ls -R
+
+      - name: Upload build to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "dist"
+          target: "/tmp/"
+
+      - name: Deploy frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+
+            BASE="/var/www/projects/hrms/frontend"
+
+            if [ "${{ github.ref_name }}" = "dev" ]; then
+              APP_DIR="$BASE/dev"
+            else
+              APP_DIR="$BASE/qa"
+            fi
+
+            RELEASE=$(date +%Y%m%d_%H%M%S)
+
+            echo "Creating release $RELEASE"
+
+            mkdir -p $APP_DIR/releases/$RELEASE
+
+            mv /tmp/dist $APP_DIR/releases/$RELEASE/
+
+            echo "Switching symlink"
+
+            ln -sfn \
+            $APP_DIR/releases/$RELEASE/dist \
+            $APP_DIR/current
+
+            echo "Cleaning old releases"
+
+            cd $APP_DIR/releases
+            ls -t | tail -n +6 | xargs -r rm -rf
+
+            echo "Frontend deployment complete"
