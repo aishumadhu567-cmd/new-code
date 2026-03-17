@@ -526,7 +526,7 @@ import ReportingManager from "./ReportingManager";
 import EmpLeaveManagement from "./EmpLeaveManagement";
 import { FaRupeeSign } from "react-icons/fa";
 import "./EmpDashboard.css";
-
+import SkillManagement from "./SkillManagement";
 export default class EmpDashboard extends Component {
   state = {
     activePage: "dashboard",
@@ -717,6 +717,8 @@ export default class EmpDashboard extends Component {
         return <EmployeeHolidayCalendar />;
       case "reportingmanager":
         return <ReportingManager />;
+      case "skillmanagement": 
+        return <SkillManagement />;
       default:
         return this.renderDashboardHome();
     }
@@ -835,6 +837,7 @@ export default class EmpDashboard extends Component {
       { key: "empleavemanagement", label: "Leave Management", icon: <FiClock /> },
       { key: "EmployeeHolidayCalendar", label: "Holiday Calendar", icon: <FiCalendar /> },
       { key: "reportingmanager", label: "Reporting Manager", icon: <FiUsers /> },
+      { key: "skillmanagement", label: "Skill Management", icon: <FiSettings /> }, // Added Skill Management menu item
     ];
 
     return (

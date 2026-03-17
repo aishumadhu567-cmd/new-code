@@ -12,6 +12,10 @@ import EmpMgr from "./EmpMgr";
 import HrLeaveManagement from "./HrLeaveManagement";
 import HolidayCalendar from "./HolidayCalendar";
 import CtcPer from "./CtcPer";
+import { Import } from "lucide-react";
+import CompanyDetails from "./CompanyDetails";
+import SkillManagement from "./SkillManagement";
+
 
 /* ─────────────────────────────────────────────────────────────
    SVG ICON COMPONENT
@@ -58,6 +62,8 @@ const NAV_ITEMS = [
   { key: "leave",           label: "Leave Management",      icon: Icons.Leave      },
   { key: "holidaycalendar", label: "Holiday Calendar",      icon: Icons.Holiday    },
   { key: "ctc",             label: "Set CTC %",             icon: Icons.CTC        },
+  { key: "company",         label: "Company Details",       icon: Icons.Department },
+ 
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -294,6 +300,8 @@ export default function HrDashBoard() {
       case "manager":         return <EmpMgr />;
       case "leave":           return <HrLeaveManagement />;
       case "holidaycalendar": return <HolidayCalendar />;
+      case "company":         return <CompanyDetails />;
+      
       case "dashboard":       return (
         <div className="dashboard-content">
 
