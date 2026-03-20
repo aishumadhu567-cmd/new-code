@@ -379,7 +379,7 @@ body {
 <div class="bar">
   <div class="bar-left">
     <span class="bar-icon">&#128196;</span>
-    <span class="bar-label">${fullName} &mdash; ATS Resume</span>
+    <span class="bar-label">${fullName} &mdash; </span>
   </div>
   <div class="bar-actions">
     <button class="btn-pdf" onclick="downloadPDF()">&#11123; Download PDF</button>
@@ -513,7 +513,7 @@ export default function CompanyDetails() {
       const url  = URL.createObjectURL(blob);
       const a    = document.createElement("a");
       a.href = url;
-      a.download = `${selectedUser.firstName}_${selectedUser.lastName}_Resume.html`;
+      // a.download = `${selectedUser.firstName}_${selectedUser.lastName}_Resume.html`;
       document.body.appendChild(a); a.click();
       document.body.removeChild(a); URL.revokeObjectURL(url);
       const win = window.open("", "_blank");
