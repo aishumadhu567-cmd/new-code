@@ -459,7 +459,7 @@ function ProfileCard({ user, onCreateResume }) {
 
       {/* Footer */}
       <div className="cd-profile-foot">
-        <span className="cd-profile-id">ID: {user.userId}</span>
+       
         <button
           className="cd-resume-btn"
           onClick={(e) => { e.stopPropagation(); onCreateResume(user); }}
@@ -566,6 +566,7 @@ export default function CompanyDetails() {
 
   const handleSearch = async () => {
     if (!searchKeyword.trim()) { showToast("Enter a skill keyword to search", "error"); return; }
+    if (searchExp && (isNaN(searchExp) || searchExp < 0)) { showToast("Experience years must be a valid number >= 0", "error"); return; }
     setIsSearching(true); setSelectedUser(null); setSearchResults([]);
     try {
       const res = await axios.get("/api/skill/search", {
@@ -778,7 +779,7 @@ export default function CompanyDetails() {
               <>
                 <div className="cd-section-header">
                   <span className="cd-section-title">Search Results</span>
-                  <span className="cd-count-badge">{searchResults.length} found</span>
+                  
                   <span style={{ fontSize: 12.5, color: "var(--muted)", marginLeft: 4 }}>
                     Click "Create Resume" on any card to generate a resume
                   </span>
