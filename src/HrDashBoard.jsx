@@ -15,6 +15,7 @@ import CtcPer from "./CtcPer";
 import { Import } from "lucide-react";
 import CompanyDetails from "./CompanyDetails";
 import SkillManagement from "./SkillManagement";
+import OfferLetterEditor from "./OfferLetterEditor";
 
 
 /* ─────────────────────────────────────────────────────────────
@@ -63,7 +64,7 @@ const NAV_ITEMS = [
   { key: "holidaycalendar", label: "Holiday Calendar",      icon: Icons.Holiday    },
   { key: "ctc",             label: "Set CTC %",             icon: Icons.CTC        },
   { key: "company",         label: "Company Details",       icon: Icons.Department },
- 
+ { key: "offerletter",     label: "Offer Letter Editor",   icon: Icons.File       },                      
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -301,6 +302,7 @@ export default function HrDashBoard() {
       case "leave":           return <HrLeaveManagement />;
       case "holidaycalendar": return <HolidayCalendar />;
       case "company":         return <CompanyDetails />;
+      case "offerletter":     return <OfferLetterEditor />;
       
       case "dashboard":       return (
         <div className="dashboard-content">
