@@ -231,18 +231,33 @@ const css = `
   .lh-right { text-align: right; }
   .lh-brand {
     display: flex; align-items: center; justify-content: flex-end;
-    gap: 10px; margin-bottom: 4px;
+    gap: 8px; margin-bottom: 3px;
   }
+  /* VB badge — navy square with italic serif VB matching PDF */
   .lh-vb {
     background: #1a3a8f; color: #fff;
-    font-size: 20px; font-weight: 900;
-    padding: 4px 9px; border-radius: 4px;
-    letter-spacing: -1px; font-family: Arial, sans-serif;
+    font-size: 24px; font-weight: 900;
+    font-style: italic;
+    font-family: Georgia, serif;
+    padding: 4px 11px 4px 9px;
+    border-radius: 5px;
+    letter-spacing: -2px;
+    line-height: 1.15;
+    display: inline-block;
   }
-  .lh-offerbeez { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: #1a3a8f; font-family: Arial, sans-serif; }
+  /* OfferBeez decorative italic text matching PDF */
+  .lh-offerbeez {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    color: #1a1a1a;
+  }
   .lh-offerbeez span { color: #e8a000; }
-  .lh-sub { font-size: 10px; color: #888; font-style: italic; margin-bottom: 5px; }
-  .lh-addr { font-size: 10.5px; color: #555; line-height: 1.55; }
+  .lh-sub { font-size: 10px; color: #888; font-style: italic; margin-bottom: 4px; }
+  .lh-addr { font-size: 10.5px; color: #444; line-height: 1.6; }
 
   .letter-title {
     text-align: center; font-size: 14.5px; font-weight: 700;
@@ -313,9 +328,12 @@ function Letterhead({ company }) {
   return (
     <div className="lh">
       <div className="lh-right">
+        {/* Logo row: VB badge + OfferBeez italic text */}
         <div className="lh-brand">
           <div className="lh-vb">VB</div>
-          <div className="lh-offerbeez">Offer<span>Beez</span></div>
+          <div className="lh-offerbeez">
+            <span style={{ color: "#1a1a1a" }}>Öff</span><span style={{ color: "#1a1a1a" }}>ër</span><span style={{ color: "#e8a000" }}>Bëëż</span>
+          </div>
         </div>
         <div className="lh-sub">(Product of Venturebiz)</div>
         <div className="lh-addr">

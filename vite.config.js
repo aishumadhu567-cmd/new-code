@@ -28,13 +28,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: "/hrms/dev/",
+  //base: "/hrms/dev/",
   plugins: [react()],
   server: {
     port: 5173,
     proxy: {
       "/api": {
-        target: "http://localhost:8085",
+        target: "http://localhost:8080",
         // target: "https://dev.hrms.venturebiz.in",
         changeOrigin: true,
         secure: false

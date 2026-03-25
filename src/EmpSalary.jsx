@@ -104,13 +104,15 @@ const EmpSalary = () => {
         startY: 65,
         theme: "grid",
         styles: { font: "times", fontSize: 9 },
-        body: [
-          ["Name", data.name, "Department", data.department],
-          ["Designation", data.designation, "Location", data.location],
-          ["Date of Joining", data.dateOfJoining, "Worked Days", data.workedDays],
-          ["Days in Month", data.totalDays, "PF No", data.pfNo],
-          ["ESI No", data.esiNo, "", ""]
-        ]
+       body: [
+  ["Name", data.name, "Bank Name", data.bankName],
+  ["Date of Joining", data.dateOfJoining, "Bank Account No", data.bankAccountNo],
+  ["Designation", data.designation, "PF No", data.pfNo],
+  ["Department", data.department, "UAN", data.uan],
+  ["Location", data.location, "ESI No", data.esiNo],
+  ["Effective Work Days", data.workedDays, "PAN No", data.panNo],
+  ["Days in Month", data.totalDays, "LOP", data.lop || 0]
+]
       });
 
       autoTable(doc, {
@@ -119,12 +121,22 @@ const EmpSalary = () => {
         theme: "grid",
         styles: { font: "times", fontSize: 9 },
         headStyles: { fillColor: [40, 40, 40] },
-        body: [
-          ["Basic", data.basic.toFixed(2), "PF", data.pf.toFixed(2)],
-          ["HRA", data.hra.toFixed(2), "", ""],
-          ["Conveyance", data.conveyance.toFixed(2), "", ""],
-          ["Total Earnings", data.grossPay.toFixed(2), "Total Deductions", data.pf.toFixed(2)]
-        ]
+       body: [
+  ["BASIC", data.basic.toFixed(2), "PF", data.pf.toFixed(2)],
+
+  ["HRA", data.hra.toFixed(2), "PROF TAX", data.professionalTax?.toFixed(2) || "0.00"],
+
+  ["SPECIAL ALLOWANCE", data.specialAllowance?.toFixed(2) || "0.00", "", ""],
+
+  ["STATUTORY BONUS", data.statutoryBonus?.toFixed(2) || "0.00", "", ""],
+
+  [
+    "Total Earnings",
+    data.grossPay.toFixed(2),
+    "Total Deductions",
+    data.pf.toFixed(2) // keep same as your current logic
+  ]
+]
       });
 
       const finalY = doc.lastAutoTable.finalY + 15;
